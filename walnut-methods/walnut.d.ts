@@ -245,9 +245,21 @@ export interface AndroidSelector {
 /** Android device automation via UIAutomator2/Appium (platform: 'android') */
 export interface WalnutAndroidContext extends WalnutBaseContext {
   readonly platform: 'android';
+
+  /** Read text from the linked object */
+  getText(): Promise<string>;
+  /** Read an attribute from the linked object */
+  getAttribute(attribute: string): Promise<string | null>;
+  /** Check visibility of the linked object */
+  isVisible(): Promise<boolean>;
+  /** Swipe the linked object in the specified direction */
+  swipe(direction: 'LEFT_TO_RIGHT' | 'RIGHT_TO_LEFT' | 'TOP_TO_BOTTOM' | 'BOTTOM_TO_TOP'): Promise<void>;
+  /** Wait for a fixed number of milliseconds */
+  wait(ms: number): Promise<void>;
+
+  /** Ad-hoc selector operations */
   isVisibleBy(selector: AndroidSelector): Promise<boolean>;
   getAttributeBy(selector: AndroidSelector, attribute: string): Promise<string | null>;
-  wait(ms: number): Promise<void>;
   callTool(name: string, args?: Record<string, any>): Promise<any>;
 }
 
